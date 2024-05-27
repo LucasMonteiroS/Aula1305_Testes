@@ -10,7 +10,15 @@ export const Formulario = ({ aoSubmeter } : FormularioProps)=>{
     const podeAdicionar = filme.nome && filme.anoDeLancamento;
     function adicionarFilme(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault()
-        aoSubmeter(filme)
+        if (anoValido(filme.anoDeLancamento)) {
+            aoSubmeter(filme)
+        } else {
+            alert('Ano de lançamento inválido')
+        }
+    }
+
+    function anoValido(ano: string){
+        return ano.length === 4 && !isNaN(Number(ano))
     }
 
     return(
